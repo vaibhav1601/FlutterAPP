@@ -1,6 +1,5 @@
-import 'transction.dart';
-
 import 'package:flutter/material.dart';
+import './Widgets/userTransaction.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter'),
     );
   }
 }
@@ -48,15 +47,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> mTransaction = [
-    Transaction(id: 't1', title: 'Marathi', amount: 2000, date: DateTime.now()),
-    Transaction(id: 't2', title: 'Maths', amount: 6000, date: DateTime.now()),
-    Transaction(id: 't3', title: 'History', amount: 7000, date: DateTime.now()),
-    Transaction(id: 't4', title: 'Science', amount: 3000, date: DateTime.now()),
-    Transaction(
-        id: 't5', title: 'Social Science', amount: 2000, date: DateTime.now()),
-  ];
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -71,59 +61,28 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Column(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: SingleChildScrollView(
+        child: Column(
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
 
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Card(
-            child: Container(
-              width: double.infinity,
-              color: Colors.lightBlueAccent,
-              child: Text(
-                "Chart",
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Card(
+              child: Container(
+                width: double.infinity,
+                color: Colors.lightBlueAccent,
+                child: Text(
+                  "Chart",
+                ),
               ),
+              elevation: 10,
             ),
-            elevation: 10,
-          ),
-          Column(
-            children: mTransaction.map((tx) {
-              return Card(
-                  child: Row(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Colors.purple,
-                            width: 2,
-                            style: BorderStyle.solid)),
-                    child: Text(
-                      tx.amount.toString(),
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.purple),
-                    ),
-                    padding: EdgeInsets.all(10),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        tx.title,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(tx.date.toString(),style: TextStyle(color: Colors.grey),)
-                    ],
-                  ),
-                ],
-              ));
-            }).toList(),
-          )
-        ],
+            UserTransaction(),
+          ],
+        ),
       ),
     );
   }
